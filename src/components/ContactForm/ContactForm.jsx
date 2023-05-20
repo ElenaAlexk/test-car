@@ -1,11 +1,11 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { nanoid } from 'nanoid';
 import { addContact } from 'redux/contactsSlice/operations';
-import { getContacts } from 'redux/selectors';
+import { selectContacts } from 'redux/contactsSlice/selectors';
 import css from '../Contacts.module.css';
 
 export const ContactForm = () => {
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(selectContacts);
   const dispatch = useDispatch(); //посилання на функцію відправки action//
 
   const handleSubmit = event => {

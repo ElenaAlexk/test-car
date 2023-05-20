@@ -1,23 +1,25 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setFilter } from 'redux/filterSlice/filterSlice';
-import { getFilter } from 'redux/selectors';
 import css from '../Contacts.module.css';
 
-export const Filter = () => {
+export const Filter = ({ filter }) => {
   const dispatch = useDispatch();
-  const filter = useSelector(getFilter);
+  const onChangeFilter = e => dispatch(setFilter(e.target.value));
 
   return (
-    <div>
-      <label className={css.formLabel}>
-        Find contacts by name
-        <input
-          className={css.formInput}
-          type="text"
-          value={filter}
-          onChange={event => dispatch(setFilter(event.target.value.trim()))}
-        />
-      </label>
-    </div>
+    <>
+      <h2>Contacts</h2>
+      <div>
+        <label className={css.formLabel}>
+          Find contacts by name
+          <input
+            className={css.formInput}
+            type="text"
+            value={filter}
+            onChange={onChangeFilter}
+          />
+        </label>
+      </div>
+    </>
   );
 };

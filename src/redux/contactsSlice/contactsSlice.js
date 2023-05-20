@@ -1,10 +1,11 @@
 import persistReducer from 'redux-persist/es/persistReducer';
 import storage from 'redux-persist/lib/storage';
 import { createSlice } from '@reduxjs/toolkit';
+import { logOut } from 'redux/auth/operations';
 import { fetchContacts, addContact, deleteContact } from './operations';
 
 const initialState = {
-  items: [],
+  contacts: [],
   isLoading: false,
   error: null,
 };
@@ -19,38 +20,41 @@ const handleRejected = (state, { payload }) => {
   state.error = payload;
 };
 
-const handleFetchSuccess = (state, { payload }) => {
-  state.isLoading = false;
-  state.error = null;
-  state.items = payload;
-};
-
-const handleAddContactSuccess = (state, { payload }) => {
-  state.isLoading = false;
-  state.error = null;
-  state.items.push(payload);
-};
-
-const handleDeleteContactSuccess = (state, { payload }) => {
-  state.isLoading = false;
-  state.error = null;
-  state.items = state.items.filter(item => item.id !== payload.id);
-};
-
 const contactsSlice = createSlice({
   name: 'contacts',
   initialState,
   //обробка зовнішніх екшенів
-  extraReducers: {
-    [fetchContacts.pending]: handlePending,
-    [addContact.pending]: handlePending,
-    [deleteContact.pending]: handlePending,
-    [fetchContacts.rejected]: handleRejected,
-    [addContact.rejected]: handleRejected,
-    [deleteContact.rejected]: handleRejected,
-    [fetchContacts.fulfilled]: handleFetchSuccess,
-    [addContact.fulfilled]: handleAddContactSuccess,
-    [deleteContact.fulfilled]: handleDeleteContactSuccess,
+  extraReducers: builder => {
+    builder
+      .addCase(fetchContacts.pending, handlePending)
+      .addCase(addContact.pending, handlePending)
+      .addCase(deleteContact.pending, handlePending)
+      .addCase(fetchContacts.rejected, handleRejected)
+      .addCase(addContact.rejected, handleRejected)
+      .addCase(deleteContact.rejected, handleRejected)
+      .addCase(fetchContacts.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        state.contacts = action.payload;
+      })
+      .addCase(addContact.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        state.contacts.push(action.payload);
+      })
+      .addCase(deleteContact.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        const index = state.contacts.findIndex(
+          contact => contact.id === action.payload.id
+        );
+        state.contacts.splice(index, 1);
+      })
+      .addCase(logOut.fulfilled, state => {
+        state.contacts = [];
+        state.isLoading = false;
+        state.error = null;
+      });
   },
 });
 

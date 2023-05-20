@@ -4,8 +4,10 @@ const filterSlice = createSlice({
   name: 'filter',
   initialState: '',
   reducers: {
-    setFilter: (state, action) => {
-      return action.payload; //значення фільтра//
+    setFilter: {
+      reducer(state, action) {
+        state.filter = action.payload; //значення фільтра//
+      },
     },
   },
 });

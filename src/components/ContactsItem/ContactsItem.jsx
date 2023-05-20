@@ -1,49 +1,29 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { getFilteredContacts, getIsLoading, getError } from 'redux/selectors';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import css from '../Contacts.module.css';
-import { fetchContacts, deleteContact } from 'redux/contactsSlice/operations';
+import { deleteContact } from 'redux/contactsSlice/operations';
 
-export const ContactList = () => {
-  const filteredContacts = useSelector(getFilteredContacts);
-  const isLoading = useSelector(getIsLoading);
-  const error = useSelector(getError);
+export const ContactItem = ({ id, name, number }) => {
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
-
-  const onDeleteContact = id => {
+  const handleDelete = () => {
     dispatch(deleteContact(id));
   };
 
   return (
-    <div>
-      {isLoading && <p>Loading contacts...</p>}
-      {error && <p>{error}</p>}
-      <ul className={css.list}>
-        {filteredContacts.map(({ id, name, phone }) => (
-          <li className={css.contactItem} key={id}>
-            <p>
-              {name}: {phone}
-            </p>
-            <button
-              className={css.button}
-              type="button"
-              onClick={() => onDeleteContact(id)}
-            >
-              Delete
-            </button>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <>
+      <li className={css.contactItem} key={id}>
+        <p>
+          {name}: {number}
+        </p>
+        <button className={css.button} type="button" onClick={handleDelete}>
+          Delete
+        </button>
+      </li>
+    </>
   );
 };
 
-ContactList.propTypes = {
+ContactItem.propTypes = {
   contacts: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
