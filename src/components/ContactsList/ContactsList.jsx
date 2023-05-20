@@ -1,6 +1,6 @@
 import { ContactItem } from 'components/ContactsItem/ContactsItem';
 
-export const ContactList = ({ items }) => {
+const ContactList = ({ items }) => {
   return (
     <ul>
       {items.map(({ id, name, number }) => (
@@ -11,3 +11,4 @@ export const ContactList = ({ items }) => {
     </ul>
   );
 };
+export default ContactList;
