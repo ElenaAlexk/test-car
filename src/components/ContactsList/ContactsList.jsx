@@ -16,7 +16,7 @@ import { selectFilter } from 'redux/filterSlice/selectors';
   );
 };
 export default ContactList**/
-export function ContactList() {
+const ContactList = () => {
   const contacts = useSelector(selectContacts);
 
   const filterValue = useSelector(selectFilter).toLowerCase();
@@ -48,4 +48,5 @@ export function ContactList() {
       ;
     </ul>
   );
-}
+};
+export default ContactList;

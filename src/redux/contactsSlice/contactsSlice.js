@@ -15,14 +15,14 @@ const handlePending = state => {
   state.error = null;
 };
 
-const handleRejected = (state, { payload }) => {
+const handleRejected = (state, action) => {
   state.isLoading = false;
-  state.error = payload;
+  state.error = action.payload;
 };
 
 const contactsSlice = createSlice({
   name: 'contacts',
-  initialState,
+  initialState: initialState,
   //обробка зовнішніх екшенів
   extraReducers: builder => {
     builder

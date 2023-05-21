@@ -4,7 +4,7 @@ import { addContact } from 'redux/contactsSlice/operations';
 import { selectContacts } from 'redux/contactsSlice/selectors';
 import css from '../Contacts.module.css';
 
-export const ContactForm = () => {
+ const ContactForm = () => {
   const contacts = useSelector(selectContacts);
   const dispatch = useDispatch(); //посилання на функцію відправки action//
 
@@ -62,3 +62,4 @@ export const ContactForm = () => {
     </form>
   );
 };
+export default ContactForm
