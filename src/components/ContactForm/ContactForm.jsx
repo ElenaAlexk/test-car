@@ -4,31 +4,41 @@ import { addContact } from 'redux/contactsSlice/operations';
 import { selectContacts } from 'redux/contactsSlice/selectors';
 import css from '../Contacts.module.css';
 
- const ContactForm = () => {
+const ContactForm = () => {
   const contacts = useSelector(selectContacts);
   const dispatch = useDispatch(); //посилання на функцію відправки action//
 
-  const handleSubmit = event => {
-    event.preventDefault();
-    const contact = {
-      id: nanoid(),
-      name: event.target.elements.name.value,
-      number: event.target.elements.number.value,
-    };
+  function handleSubmit(evt) {
+    evt.preventDefault();
+    //const contact = {
+    //id: nanoid(),
+    //name: event.target.elements.name.value,
+    //number: event.target.elements.number.value,
+    const form = evt.target;
+    const name = form.name.value;
+    const number = form.number.value;
 
-    //перевірка чи існує такий контакт вже//
-    const existingContact = contacts.find(
-      ({ name }) => name.toLowerCase() === contact.name.toLowerCase()
-    );
-
-    if (existingContact) {
-      return alert(`${contact.name}: is already in contacts`);
+    if (
+      contacts.find(
+        contact => contact.name.toLowerCase() === name.toLowerCase()
+      )
+    ) {
+      return alert(`${name} is alredy in contacts.`);
     }
 
+    //перевірка чи існує такий контакт вже//
+    //const existingContact = contacts.find(
+    //({ name }) => name.toLowerCase() === contact.name.toLowerCase()
+    //);
+
+    //if (existingContact) {
+    //return alert(`${contact.name}: is already in contacts`);
+    //}
+
     //викликаємо генератор екшену та передаємо текст завдання для payload//
-    dispatch(addContact(contact));
-    event.target.reset(); //очищаємо форму//
-  };
+    dispatch(addContact({ name, number }));
+    form.reset(); //очищаємо форму//
+  }
 
   return (
     <form className={css.form} onSubmit={handleSubmit}>
@@ -62,4 +72,4 @@ import css from '../Contacts.module.css';
     </form>
   );
 };
-export default ContactForm
+export default ContactForm;
