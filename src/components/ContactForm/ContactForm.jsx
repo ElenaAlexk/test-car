@@ -36,6 +36,7 @@ const ContactForm = () => {
     //}
 
     //викликаємо генератор екшену та передаємо текст завдання для payload//
+    console.log({ name, number });
     dispatch(addContact({ name, number }));
     form.reset(); //очищаємо форму//
   }

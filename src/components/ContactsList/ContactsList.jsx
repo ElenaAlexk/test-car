@@ -27,6 +27,9 @@ export function ContactList() {
   const handleDelete = evt => {
     dispatch(deleteContact(evt.currentTarget.id));
   };
+  // const handleDelete = () => {
+  //   dispatch(deleteContact(id));
+  // };
 
   const getVisibilityContacts = () => {
     if (!filterValue || filterValue === '') {
@@ -39,17 +42,22 @@ export function ContactList() {
   };
 
   const visibilityContacts = getVisibilityContacts();
-
+  console.log({ contacts });
   return (
     <ul>
       {visibilityContacts.map(contact => (
         //<ContactItem key={contact.id}></ContactItem>
         //<ContactItem key={id} id={id} name={name} number={number} />
-        <li className={css.contactItem} key={contact.id}>
+        <li className={css.contactItem} key={contact.id} id={contact.id}>
           <p>
             {contact.name}: {contact.number}
           </p>
-          <button className={css.button} type="button" onClick={handleDelete}>
+          <button
+            className={css.button}
+            id={contact.id}
+            type="button"
+            onClick={handleDelete}
+          >
             Delete
           </button>
         </li>
