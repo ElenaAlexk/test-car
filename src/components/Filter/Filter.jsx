@@ -8,7 +8,7 @@ export const Filter = ({ filter }) => {
 
   return (
     <>
-      <h2>Contacts</h2>
+      <h2 className={css.text}>Contacts</h2>
       <div>
         <label className={css.formLabel}>
           Find contacts by name

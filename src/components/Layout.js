@@ -1,10 +1,11 @@
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 import { AppBar } from './AppBar/AppBar';
+import css from './Contacts.module.css';
 
 const Layout = () => {
   return (
-    <div style={{ maxWidth: 960, margin: '0 auto', padding: '0 16px' }}>
+    <div className={css.container}>
       <AppBar />
       <Suspense fallback={null}>
         <Outlet />

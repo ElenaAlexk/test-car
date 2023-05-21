@@ -5,10 +5,8 @@ import { fetchContacts } from 'redux/contactsSlice/operations';
 import { ContactList } from 'components/ContactsList/ContactsList';
 import ContactForm from 'components/ContactForm/ContactForm';
 import { Filter } from 'components/Filter/Filter';
-//import { selectFilter } from 'redux/filterSlice/selectors';
 import { selectIsLoading } from 'redux/contactsSlice/selectors';
 
-//import { getFilteredContacts } from 'redux/selectors';
 
 const Contacts = () => {
   const dispatch = useDispatch();
@@ -18,28 +16,7 @@ const Contacts = () => {
     dispatch(fetchContacts());
   }, [dispatch]);
 
-  //const contacts = useSelector(selectContacts);
-
-  //const filteredContacts = useSelector(selectFilter);
-  //const visibleContacts = useSelector(getFilteredContacts);
-
-  //return (
-  //<>
-  //<Helmet>
-  //<title>Your contacts</title>
-  //</Helmet>
-  //<div>{isLoading && 'Request in progress...'}</div>
-  //<ContactForm />
-  //{contacts.length > 0 ? (
-  //<>
-  //<Filter filter={filteredContacts} />
-  //ContactList items={visibleContacts} />
-  //</>
-  //) : (
-  //<p style={{ textAlign: 'center' }}>There are no contacts</p>
-  //)}
-  //</>
-  //);
+  
   return (
     <>
       <Helmet>

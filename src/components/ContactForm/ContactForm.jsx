@@ -10,10 +10,6 @@ const ContactForm = () => {
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    //const contact = {
-    //id: nanoid(),
-    //name: event.target.elements.name.value,
-    //number: event.target.elements.number.value,
     const form = evt.target;
     const name = form.name.value;
     const number = form.number.value;
@@ -26,17 +22,8 @@ const ContactForm = () => {
       return alert(`${name} is alredy in contacts.`);
     }
 
-    //перевірка чи існує такий контакт вже//
-    //const existingContact = contacts.find(
-    //({ name }) => name.toLowerCase() === contact.name.toLowerCase()
-    //);
-
-    //if (existingContact) {
-    //return alert(`${contact.name}: is already in contacts`);
-    //}
-
     //викликаємо генератор екшену та передаємо текст завдання для payload//
-    console.log({ name, number });
+    //console.log({ name, number });
     dispatch(addContact({ name, number }));
     form.reset(); //очищаємо форму//
   }
