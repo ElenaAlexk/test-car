@@ -7,7 +7,6 @@ import ContactForm from 'components/ContactForm/ContactForm';
 import { Filter } from 'components/Filter/Filter';
 import { selectIsLoading } from 'redux/contactsSlice/selectors';
 
-
 const Contacts = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectIsLoading);
@@ -16,11 +15,10 @@ const Contacts = () => {
     dispatch(fetchContacts());
   }, [dispatch]);
 
-  
   return (
     <>
       <Helmet>
-        <title>Your contacts</title>
+        <title>Phonebook</title>
       </Helmet>
       <div>{isLoading && 'Request in progress...'}</div>
       <ContactForm />
