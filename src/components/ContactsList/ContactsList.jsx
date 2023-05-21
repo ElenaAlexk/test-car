@@ -42,12 +42,12 @@ export function ContactList() {
 
   return (
     <ul>
-      {visibilityContacts.map(({ id, name, number }) => (
+      {visibilityContacts.map(contact => (
         //<ContactItem key={contact.id}></ContactItem>
         //<ContactItem key={id} id={id} name={name} number={number} />
-        <li className={css.contactItem} key={id}>
+        <li className={css.contactItem} key={contact.id}>
           <p>
-            {name}: {number}
+            {contact.name}: {contact.number}
           </p>
           <button className={css.button} type="button" onClick={handleDelete}>
             Delete
