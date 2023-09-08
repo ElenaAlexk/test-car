@@ -1,3 +1,10 @@
+import { CardsList } from './CardsList/CardsList';
+import cars from '../advertsCars';
+
 export const App = () => {
-  return <div>App</div>;
+  return (
+    <>
+      <CardsList cars={cars} />
+    </>
+  );
 };
